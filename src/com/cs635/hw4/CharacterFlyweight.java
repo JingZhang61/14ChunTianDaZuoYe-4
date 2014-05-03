@@ -19,6 +19,9 @@ public class CharacterFlyweight implements FlyweightInterface {
 	@Override
 	public void write(Font f) {
 		// TODO Auto-generated method stub
+		
+		
+		
 
 	}
 }
