@@ -6,4 +6,5 @@ public interface FlyweightInterface {
 	public Character getCharacter();
 
 	public void write(Font f);
+	
 }
