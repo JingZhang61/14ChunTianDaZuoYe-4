@@ -1,17 +1,15 @@
 package com.cs635.hw4;
 
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class RunArray {
 	private static LinkedList<Font> fontArray;
 	private static LinkedList<Integer> runArray;
-
+	
 	public RunArray(){
 		fontArray = new LinkedList<Font> ();
-		runArray = new LinkedList <Integer> ();
+		runArray = new LinkedList<Integer> ();
 	}
 	
 	public void addRun(int start, int length, Font font) {
@@ -40,10 +38,8 @@ public class RunArray {
 			if((sum<index)&&(sum+runArray.get(i+1)>=index)) {
 				return fontArray.get(i+1);
 			}
-			else {
-				return null;
-			}
-		}	
+		}
+		return null;
 	}
 
 	public void appendRun(Font f, int length) {
