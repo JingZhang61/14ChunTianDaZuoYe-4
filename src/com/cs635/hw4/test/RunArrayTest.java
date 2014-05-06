@@ -1,10 +1,6 @@
 package com.cs635.hw4.test;
 
 import java.awt.Font;
-import java.util.LinkedList;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import com.cs635.hw4.NewRunArray;
 
 import junit.framework.TestCase;
