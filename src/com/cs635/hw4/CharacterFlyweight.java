@@ -2,7 +2,13 @@ package com.cs635.hw4;
 
 import java.awt.Font;
 
-public class CharacterFlyweight implements FlyweightInterface {
+/**
+ * Character Flyweight pattern implementation
+ * 
+ * @author Shu Zhao
+ * 
+ */
+public class CharacterFlyweight implements CharacterFlyweightInterface {
 
 	private char character;
 
@@ -11,7 +17,7 @@ public class CharacterFlyweight implements FlyweightInterface {
 	}
 
 	@Override
-	public Character getCharacter() {
+	public char getCharacter() {
 		// TODO Auto-generated method stub
 		return character;
 	}

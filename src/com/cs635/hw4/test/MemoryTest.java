@@ -1,56 +1,49 @@
 package com.cs635.hw4.test;
 
-import java.awt.Font;
-import java.io.IOException;
-import java.util.BitSet;
-
 import com.cs635.hw4.SampleText;
-import com.cs635.hw4.main.FlyweightTextProcessor;
-import com.cs635.hw4.main.NormalTextProcessor;
+import com.cs635.hw4.textprocessor.FlyweightTextProcessor;
+import com.cs635.hw4.textprocessor.NormalTextProcessor;
+import com.cs635.hw4.textprocessor.TextProcessor;
 
 import junit.framework.TestCase;
 
+/**
+ * Compare memory use between normal text processor and flyweight processor
+ * 
+ * @author Shu Zhao
+ * 
+ */
 public class MemoryTest extends TestCase {
 
-	public void test() {
-		assertEquals(4.0, new SizeofUtil() {
-			int[] array;
+	public void testMemory() {
+		final Runtime runtime = Runtime.getRuntime();
+		long startMemory, endMemory, normalMemory, flyweightMemory;
+		TextProcessor normalProcessor, flyweightProcessor;
 
-			@Override
-			protected int create() {
-				array = new int[1024];
-				return array.length;
-			}
-		}.averageBytes(), 0.02);
+		// Normal Processor memory
+		startMemory = runtime.totalMemory() - runtime.freeMemory();
+		normalProcessor = new NormalTextProcessor();
+		normalProcessor.storeSampleText();
+		endMemory = runtime.totalMemory() - runtime.freeMemory();
+		normalMemory = endMemory - startMemory;
 
-		assertEquals(1.0 / 8, new SizeofUtil() {
-			BitSet bits;
+		System.out.println("Normal Memory: " + normalMemory);
 
-			@Override
-			protected int create() {
-				bits = new BitSet(1024 * 1024);
-				return bits.size();
-			}
-		}.averageBytes(), 1e-4);
-	}
+		// Flyweight Processor memory
+		startMemory = runtime.totalMemory() - runtime.freeMemory();
+		flyweightProcessor = new FlyweightTextProcessor();
+		flyweightProcessor.storeSampleText();
+		endMemory = runtime.totalMemory() - runtime.freeMemory();
+		flyweightMemory = endMemory - startMemory;
 
-	public void testNormal() {
-		System.out.println(new SizeofUtil() {
-			@Override
-			protected int create() {
-				NormalTextProcessor processor = new NormalTextProcessor();
-				processor.storeSampleText();
-				return SampleText.TEXT.length();
-			}
-		}.averageBytes());
+		System.out.println("Flyweight Memory: " + flyweightMemory);
 
-		System.out.println(new SizeofUtil() {
-			@Override
-			protected int create() {
-				FlyweightTextProcessor processor = new FlyweightTextProcessor();
-				processor.storeSampleText();
-				return SampleText.TEXT.length();
-			}
-		}.averageBytes());
+		// Verify two processor store same text, i.e character and font are same
+		for (int i = 0; i < SampleText.TEXT.length(); i++) {
+			assertEquals(normalProcessor.charAt(i),
+					flyweightProcessor.charAt(i));
+			assertTrue(normalProcessor.fontAt(i).equals(
+					flyweightProcessor.fontAt(i)));
+		}
 	}
 }

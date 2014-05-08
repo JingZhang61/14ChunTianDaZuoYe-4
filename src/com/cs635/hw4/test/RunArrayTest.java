@@ -1,10 +1,16 @@
 package com.cs635.hw4.test;
 
 import java.awt.Font;
-import com.cs635.hw4.NewRunArray;
+import com.cs635.hw4.RunArray;
 
 import junit.framework.TestCase;
 
+/**
+ * Test for RunArray class
+ * 
+ * @author Shu Zhao
+ * 
+ */
 public class RunArrayTest extends TestCase {
 
 	final Font fontA = new Font("Courier", Font.BOLD, 12);
@@ -12,7 +18,7 @@ public class RunArrayTest extends TestCase {
 	final Font fontC = new Font("TimesRoman", Font.ITALIC, 14);
 
 	public void testAppend() {
-		NewRunArray runArray = new NewRunArray();
+		RunArray<Font> runArray = new RunArray<Font>();
 
 		// Empty runArray
 		assertNull(runArray.atRun(0));
@@ -36,7 +42,7 @@ public class RunArrayTest extends TestCase {
 	}
 
 	public void testAdd() {
-		NewRunArray runArray = new NewRunArray();
+		RunArray<Font> runArray = new RunArray<Font>();
 
 		// First add fontC for characters 200-259
 		assertEquals(0, runArray.addRun(200, 60, fontC));
@@ -70,7 +76,7 @@ public class RunArrayTest extends TestCase {
 	}
 
 	public void testAdd2() {
-		NewRunArray runArray = new NewRunArray();
+		RunArray<Font> runArray = new RunArray<Font>();
 		int i;
 		// Add 10 fonts for first 100 characters
 		for (i = 0; i < 10; i++) {
