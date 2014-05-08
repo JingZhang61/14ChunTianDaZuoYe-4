@@ -15,7 +15,37 @@ import junit.framework.TestCase;
  */
 public class MemoryTest extends TestCase {
 
-	public void testMemory() {
+	/**
+	 * Test using SizeOfUtil tool, to calculate average memory cost for each
+	 * character
+	 */
+	public void testWithSizeOfUtil() {
+		System.out.println("In normal text processor, Each character costs "
+				+ new SizeofUtil() {
+
+					@Override
+					protected int create() {
+						TextProcessor processor = new NormalTextProcessor();
+						processor.storeSampleText();
+						return SampleText.TEXT.length();
+					}
+				}.averageBytes() + " bytes");
+
+		System.out.println("In normal text processor, Each character costs "
+				+ new SizeofUtil() {
+					@Override
+					protected int create() {
+						TextProcessor processor = new FlyweightTextProcessor();
+						processor.storeSampleText();
+						return SampleText.TEXT.length();
+					}
+				}.averageBytes() + " bytes");
+	}
+
+	/**
+	 * Test total memory cost by directly reading memory cost in JVM
+	 */
+	public void testTotalMemory() {
 		final Runtime runtime = Runtime.getRuntime();
 		long startMemory, endMemory, normalMemory, flyweightMemory;
 		TextProcessor normalProcessor, flyweightProcessor;

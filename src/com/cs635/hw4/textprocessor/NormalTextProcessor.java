@@ -6,6 +6,9 @@ import com.cs635.hw4.SampleText;
 /**
  * A normal text processor: all character objects are stored with all their
  * state (intrinsic and extrinsic)
+ * 
+ * @author Shu Zhao
+ * 
  */
 public class NormalTextProcessor implements TextProcessor {
 	NormalTextCharacter[] savedText;
